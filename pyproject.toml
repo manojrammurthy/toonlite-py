@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling>=1.13"]
+build-backend = "hatchling.build"
+
+[project]
+name = "toonlite"
+version = "0.1.0"
+description = "A tiny TOON-lite encoder/decoder for Python."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Manoj Ramamurthy", email = "manojramoorthy@gmail.com" }
+]
+keywords = ["toon", "serialization", "config", "parser"]
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "License :: OSI Approved :: MIT License",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/toonlite"]
