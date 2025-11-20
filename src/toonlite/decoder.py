@@ -5,6 +5,9 @@ from typing import Any, Dict, List, Tuple
 from .exceptions import ToonDecodeError
 
 
+Container = Dict[str, Any] | List[Any]
+
+
 def loads(data: str) -> Dict[str, Any]:
     """
     Parse a TOON-lite string into a Python dict.
@@ -17,9 +20,14 @@ def loads(data: str) -> Dict[str, Any]:
     if not isinstance(data, str):
         raise ToonDecodeError("Input to loads() must be a string.")
 
-    lines = [line.rstrip("\n") for line in data.splitlines() if line.strip() != ""]
+    # Remove empty lines and trailing newlines
+    lines: List[str] = [
+        line.rstrip("\n") for line in data.splitlines() if line.strip() != ""
+    ]
+
     root: Dict[str, Any] = {}
-    stack: List[Tuple[int, Any]] = [(0, root)]  # (indent_level, container)
+    # stack of (indent_level, container)
+    stack: List[Tuple[int, Container]] = [(0, root)]
 
     for raw_line in lines:
         indent = len(raw_line) - len(raw_line.lstrip(" "))
@@ -54,27 +62,29 @@ def loads(data: str) -> Dict[str, Any]:
 
         # Start of nested object
         if value_part == "":
-            new_container: Dict[str, Any] = {}
             if not isinstance(current, dict):
                 raise ToonDecodeError(
                     f"Cannot attach nested object under non-dict: {raw_line!r}"
                 )
+            new_container: Dict[str, Any] = {}
             current[key] = new_container
             stack.append((indent + 4, new_container))
             continue
 
         # Key-value pair
-        value = _parse_scalar(value_part)
         if not isinstance(current, dict):
             raise ToonDecodeError(
                 f"Cannot attach key-value pair under non-dict: {raw_line!r}"
             )
+
+        value: Any = _parse_scalar(value_part)
         current[key] = value
 
         # List marker
         if value_part == "[]":
-            current[key] = []
-            stack.append((indent + 4, current[key]))
+            new_list: List[Any] = []
+            current[key] = new_list
+            stack.append((indent + 4, new_list))
 
     return root
 

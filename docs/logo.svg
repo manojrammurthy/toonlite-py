@@ -1,0 +1,33 @@
+<svg width="512" height="160" viewBox="0 0 512 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#22C55E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background pill -->
+  <rect x="8" y="24" rx="24" ry="24" width="496" height="112"
+        fill="#0F172A" />
+
+  <!-- Bracket-ish icon -->
+  <rect x="40" y="50" width="10" height="60" rx="4" fill="#E5E7EB"/>
+  <rect x="72" y="50" width="10" height="60" rx="4" fill="#E5E7EB"/>
+  <circle cx="61" cy="80" r="12" fill="url(#g1)" />
+
+  <!-- Wordmark -->
+  <text x="120" y="83" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-size="32" font-weight="600" fill="#E5E7EB">
+    toon
+  </text>
+  <text x="215" y="83" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-size="32" font-weight="300" fill="#A5B4FC">
+    lite
+  </text>
+
+  <!-- Tagline -->
+  <text x="120" y="112" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+        font-size="14" fill="#9CA3AF">
+    A tiny TOON Lite encoder/decoder for Python
+  </text>
+</svg>
